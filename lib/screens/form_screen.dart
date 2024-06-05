@@ -41,7 +41,7 @@ class _FormScreenState extends State<FormScreen> {
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 245, 178, 255),
           title: const Text(
-            'Nova Tarefa',
+            'Adicione um Produto',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -63,7 +63,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       validator: (value) {
                         if (valueValidator(value)) {
-                          return 'Insira o nome da Tarefa';
+                          return 'Insira um Produto';
                         }
                         return null;
                       },
@@ -71,7 +71,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Tarefa',
+                        hintText: 'Produto',
                         fillColor: Colors.white70,
                         filled: true,
                       ),
@@ -91,7 +91,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Dificuldade',
+                        hintText: 'Avaliação do Produto 1 a 5',
                         fillColor: Colors.white70,
                         filled: true,
                       ),
@@ -114,7 +114,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Imagem',
+                        hintText: 'Imagem/ URL',
                         fillColor: Colors.white70,
                         filled: true,
                       ),
@@ -155,7 +155,7 @@ class _FormScreenState extends State<FormScreen> {
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Criando Nova Tarefa'),
+                            content: Text('Criando Nova Produto'),
                           ),
                         );
                         Navigator.pop(context);

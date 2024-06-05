@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task/components/difficulty.dart';
 
+// ignore: must_be_immutable
 class Task extends StatefulWidget {
   final String name;
   final String foto;
@@ -33,7 +34,7 @@ class _TaskState extends State<Task> {
               borderRadius: BorderRadius.circular(4),
               color: Color.fromARGB(255, 245, 178, 255),
             ),
-            height: 140,
+            height: 110,
           ),
           Column(
             children: [
@@ -51,7 +52,7 @@ class _TaskState extends State<Task> {
                         borderRadius: BorderRadius.circular(4),
                         color: Colors.black26,
                       ),
-                      width: 72,
+                      width: 180,
                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
@@ -84,55 +85,10 @@ class _TaskState extends State<Task> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 67,
-                      height: 67,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            widget.nivel++;
-                          });
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Icon(Icons.arrow_drop_up),
-                            Text(
-                              'UP',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 200,
-                      child: LinearProgressIndicator(
-                        color: Colors.white,
-                        value: (widget.dificuldade > 0)
-                            ? (widget.nivel / widget.dificuldade) / 10
-                            : 1,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Nível: ${widget.nivel}',
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                ],
-              ),
+             
             ],
           )
         ],

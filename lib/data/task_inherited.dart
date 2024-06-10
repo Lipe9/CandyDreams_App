@@ -9,16 +9,18 @@ class TaskInherited extends InheritedWidget {
   }) : super(key: key, child: child);
 
   final List<Task> taskList = [
-    Task('Bolo', 'assets/IMG-20240603-WA0001.jpg', 5),
-    Task('Bolo de pote', 'assets/IMG-20240603-WA0004.jpg', 2),
-    Task('kkkkk', 'assets/IMG-20240603-WA0005.jpg', 5),
-    Task('Andar de bike', 'assets/IMG-20240603-WA0006.jpg', 1),
-    Task('Meditar', 'assets/IMG-20240603-WA0007.jpg', 5),
-    Task('COCO', 'assets/IMG-20240603-WA0008.jpg', 4),
+    Task('Bolo de Chocolate', 'assets/IMG-20240603-WA0001.jpg', 5, 20),
+    Task('Bolo de Pote', 'assets/IMG-20240603-WA0004.jpg', 2, 10),
+    Task('Mousse', 'assets/IMG-20240603-WA0005.jpg', 5, 11),
+    Task('Brownie', 'assets/IMG-20240603-WA0006.jpg', 1, 11),
+    Task('Pudim', 'assets/IMG-20240603-WA0007.jpg', 5, 1),
+    Task('Brigadeiro', 'assets/IMG-20240603-WA0008.jpg', 4, 11),
   ];
 
-  void newTask(String name, String photo, int difficulty) {
-    taskList.add(Task(name, photo, difficulty));
+  get tasks => null;
+
+  void newTask(String name, String photo, int difficulty, double price) {
+    taskList.add(Task(name, photo, difficulty, price));
   }
 
   static TaskInherited of(BuildContext context) {

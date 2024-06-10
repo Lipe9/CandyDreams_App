@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_task/data/task_inherited.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key, required this.taskContext});
+  const FormScreen({Key? key, required this.taskContext}) : super(key: key);
 
   final BuildContext taskContext;
 
@@ -14,23 +14,28 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   bool valueValidator(String? value) {
-    if (value != null && value.isEmpty) {
-      return true;
-    }
-    return false;
+    return value == null || value.isEmpty;
   }
 
   bool difficultyValidator(String? value) {
-    if (value != null && value.isEmpty) {
-      if (int.parse(value) > 5 || int.parse(value) < 1) {
-        return true;
-      }
+    if (value == null || value.isEmpty) {
+      return true;
     }
-    return false;
+    final intVal = int.tryParse(value);
+    return intVal == null || intVal > 5 || intVal < 1;
+  }
+
+  bool priceValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return true;
+    }
+    final doubleVal = double.tryParse(value);
+    return doubleVal == null || doubleVal <= 0;
   }
 
   @override
@@ -120,6 +125,26 @@ class _FormScreenState extends State<FormScreen> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      validator: (value) {
+                        if (priceValidator(value)) {
+                          return 'Insira um preço válido';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      controller: priceController,
+                      textAlign: TextAlign.center,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Preço',
+                        fillColor: Colors.white70,
+                        filled: true,
+                      ),
+                    ),
+                  ),
                   Container(
                     width: 72,
                     height: 100,
@@ -145,13 +170,11 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // print(nameController.text);
-                        // print(int.parse(difficultyController.text));
-                        // print(imageController.text);
                         TaskInherited.of(widget.taskContext).newTask(
                           nameController.text,
                           imageController.text,
                           int.parse(difficultyController.text),
+                          double.parse(priceController.text),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

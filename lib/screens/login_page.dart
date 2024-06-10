@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -10,91 +10,155 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String email = '';
   String password = '';
+  bool showError = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        SingleChildScrollView(
-          child: Container(
-            color: Color.fromARGB(255, 245, 178, 255),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 250,
-                      height: 250,
-                      child: Image.network(
-                          'https://i.postimg.cc/gcN9vpDc/C-pia-de-Logo-de-Est-dio-de-beleza-Rosa-20240603-191408-0000-removebg-preview.png'),
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 245, 178, 255),
+              Color.fromARGB(255, 218, 96, 236),
+            ],
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(
+                    'https://i.postimg.cc/gcN9vpDc/C-pia-de-Logo-de-Est-dio-de-beleza-Rosa-20240603-191408-0000-removebg-preview.png',
+                    width: 250,
+                    height: 250,
+                  ),
+                  const SizedBox(height: 20),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
-                    Container(height: 20),
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            TextField(
-                              onChanged: (value) {
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            onChanged: (value) {
+                              setState(() {
                                 email = value;
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: const InputDecoration(
-                                labelText: 'Email',
-                                border: OutlineInputBorder(),
+                              });
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.email),
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor, insira um email válido';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                password = value;
+                              });
+                            },
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.lock),
+                              labelText: 'Password',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor, insira uma senha válida';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 15),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (email == 'cd' &&
+                                  password == 'lipe9') {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                Future.delayed(
+                                  const Duration(seconds: 1),
+                                  () {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                    Navigator.of(context)
+                                        .pushReplacementNamed('/home');
+                                  },
+                                );
+                              } else {
+                                setState(() {
+                                  showError = true;
+                                });
+                              }
+                            },
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: isLoading
+                                  ? const CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.white),
+                                    )
+                                  : const Text(
+                                      'Entrar',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                            ),
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all<Color>(
+                                Color.fromARGB(255, 201, 112, 228),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextField(
-                              onChanged: (value) {
-                                password = value;
-                              },
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                  labelText: 'Password',
-                                  border: OutlineInputBorder()),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                if (email == 'candy.dreams@gmail.com' &&
-                                    password == 'lipe9') {
-                                  Navigator.of(context)
-                                      .pushReplacementNamed('/home');
-                                } else {
-                                  print('invalido');
-                                }
-                              },
-                              child: const SizedBox(
-                                width: double.infinity,
-                                child: Text(
-                                  'Entrar',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.pinkAccent,
-                                  ),
+                          ),
+                          if (showError)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Text(
+                                'Email ou senha incorretos.',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 0, 0),
+                                  fontSize: 16,
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        )
-      ],
+        ),
+      ),
     );
   }
 }

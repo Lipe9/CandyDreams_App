@@ -6,8 +6,9 @@ class Task extends StatefulWidget {
   final String name;
   final String foto;
   final int dificuldade;
+  final double price;
 
-  Task(this.name, this.foto, this.dificuldade, {super.key});
+  Task(this.name, this.foto, this.dificuldade, this.price, {Key? key}) : super(key: key);
 
   int nivel = 0;
 
@@ -58,13 +59,13 @@ class _TaskState extends State<Task> {
                         borderRadius: BorderRadius.circular(4),
                         child: assetOrNetwork()
                             ? Image.asset(
-                                widget.foto,
-                                fit: BoxFit.cover,
-                              )
+                          widget.foto,
+                          fit: BoxFit.cover,
+                        )
                             : Image.network(
-                                widget.foto,
-                                fit: BoxFit.cover,
-                              ),
+                          widget.foto,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Column(
@@ -72,11 +73,21 @@ class _TaskState extends State<Task> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 200,
+                          width: 310,
                           child: Text(
                             widget.name,
                             style: const TextStyle(
-                                fontSize: 24, overflow: TextOverflow.ellipsis),
+                              fontSize: 24,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '\$${widget.price.toStringAsFixed(2)}', // Mostra o preço formatado com 2 casas decimais
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green, // Cor opcional para o preço
                           ),
                         ),
                         Difficulty(
@@ -88,7 +99,6 @@ class _TaskState extends State<Task> {
                   ],
                 ),
               ),
-             
             ],
           )
         ],

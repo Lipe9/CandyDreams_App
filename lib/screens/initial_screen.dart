@@ -34,17 +34,10 @@ class _InitialScreensState extends State<InitialScreens> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.photo),
-              title: const Text('Tela'),
-              onTap: () {
-                Navigator.of(context).pushReplacementNamed('/tela');
-              },
-            ),
-            ListTile(
               leading: const Icon(Icons.groups),
               title: const Text('Sobre Nós'),
               onTap: () {
-                Navigator.of(context).pushReplacementNamed('/');
+                Navigator.of(context).pushReplacementNamed('/tela');
               },
             ),
             ListTile(

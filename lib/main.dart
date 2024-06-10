@@ -4,6 +4,7 @@ import 'package:flutter_task/screens/app_padrao.dart';
 import 'package:flutter_task/screens/initial_screen.dart';
 import 'package:flutter_task/screens/login_page.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginPage(),
         '/home': (context) => TaskInherited(child: const InitialScreens()),
         '/tela': (context) => const MyFirstWidge(),
+        
       },
     );
   }

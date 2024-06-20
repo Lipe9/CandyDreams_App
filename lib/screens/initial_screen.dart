@@ -32,6 +32,7 @@ class _InitialScreensState extends State<InitialScreens> {
               onTap: () {
                 Navigator.of(context).pushReplacementNamed('/home');
               },
+              
             ),
             ListTile(
               leading: const Icon(Icons.groups),
@@ -57,6 +58,7 @@ class _InitialScreensState extends State<InitialScreens> {
           'Lista de Produtos',
           style: TextStyle(color: Colors.white),
         ),
+         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: ListView(
         children: TaskInherited.of(context).taskList,

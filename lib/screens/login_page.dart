@@ -8,7 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String email = '';
+  String user = '';
   String password = '';
   bool showError = false;
   bool isLoading = false;
@@ -52,13 +52,13 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             onChanged: (value) {
                               setState(() {
-                                email = value;
+                                user = value;
                               });
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.email),
-                              labelText: 'Email',
+                              prefixIcon: Icon(Icons.account_circle),
+                              labelText: 'Usuário',
                               border: OutlineInputBorder(),
                             ),
                             validator: (value) {
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             decoration: const InputDecoration(
                               prefixIcon: Icon(Icons.lock),
-                              labelText: 'Password',
+                              labelText: 'Senha',
                               border: OutlineInputBorder(),
                             ),
                             validator: (value) {
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 15),
                           ElevatedButton(
                             onPressed: () {
-                              if (email == 'cd' &&
+                              if (user == 'Felipe' &&
                                   password == 'lipe9') {
                                 setState(() {
                                   isLoading = true;
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                             const Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
                               child: Text(
-                                'Email ou senha incorretos.',
+                                'User ou senha incorretos.',
                                 style: TextStyle(
                                   color: Color.fromARGB(255, 255, 0, 0),
                                   fontSize: 16,

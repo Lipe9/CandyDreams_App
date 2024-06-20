@@ -8,14 +8,12 @@ import 'package:flutter_task/screens/login_page.dart';
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Candy Dreams',
+      title: 'CandyDreams',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 245, 178, 255)),
       ),
